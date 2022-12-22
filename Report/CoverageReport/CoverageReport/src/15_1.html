@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>E:\Projects\QALabs\Lab4\Lab4\TDD_Chess\Chessman\Pieces\TChessmanQueen.cs</title>
+    <script type="text/javascript" src="../js/dotcover.sourceview.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/dotcover.report.css" />
+  </head>
+  <body>
+    <pre id="content" class="source-code">
+namespace TDD_Chess.Pieces;
+
+public class TChessmanQueen : TChessman
+{
+    public TChessmanQueen(Side side, TChessField field, TChessBoard board) : base(PieceType.FigureQueen, side, field, board)
+    {
+    }
+
+    private bool AcceptableCollision(TChessField newField)
+    {
+        return Board.Collide(Field, newField) == newField;
+    }
+
+    protected override bool AcceptableMove(TChessField newField)
+    {
+        var horMove = newField.Col - Field.Col;
+        var verMove = newField.Row - Field.Row;
+        if (horMove == 0 &amp;&amp; verMove != 0) return AcceptableCollision(newField);
+        if (horMove != 0 &amp;&amp; verMove == 0) return AcceptableCollision(newField);
+        if (Math.Abs(horMove) == Math.Abs(verMove)) return AcceptableCollision(newField);
+        return false;
+    }
+
+    public override void OnMove()
+    {
+        
+    }
+}
+    </pre>
+    <script type="text/javascript">
+      highlightRanges([[5,78,5,125,1],[6,5,6,6,1],[7,5,7,6,1],[10,5,10,6,1],[11,9,11,59,1],[12,5,12,6,1],[15,5,15,6,1],[16,9,16,48,1],[17,9,17,48,1],[18,9,18,42,1],[18,43,18,80,1],[19,9,19,42,1],[19,43,19,80,1],[20,9,20,52,1],[20,53,20,90,1],[21,9,21,22,1],[22,5,22,6,1],[25,5,25,6,1],[27,5,27,6,1]]);
+    </script>
+  </body>
+</html>

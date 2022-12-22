@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>E:\Projects\QALabs\Lab4\Lab4\TDD_Chess\Chessman\Pieces\TChessmanKing.cs</title>
+    <script type="text/javascript" src="../js/dotcover.sourceview.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/dotcover.report.css" />
+  </head>
+  <body>
+    <pre id="content" class="source-code">
+namespace TDD_Chess.Pieces;
+
+public class TChessmanKing : TChessman
+{
+    public TChessmanKing(Side side, TChessField field, TChessBoard board) : base(PieceType.FigureKing, side, field, board)
+    {
+    }
+
+    protected override bool AcceptableMove(TChessField newField)
+    {
+        throw new NotImplementedException();
+    }
+
+    public override void OnMove()
+    {
+        throw new NotImplementedException();
+    }
+}
+    </pre>
+    <script type="text/javascript">
+      highlightRanges([[5,77,5,123,1],[6,5,6,6,1],[7,5,7,6,1],[10,5,10,6,0],[11,9,11,45,0],[15,5,15,6,0],[16,9,16,45,0]]);
+    </script>
+  </body>
+</html>

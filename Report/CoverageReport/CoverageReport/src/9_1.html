@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>E:\Projects\QALabs\Lab4\Lab4\TDD_Chess\Chessboard\TChessBoard.cs</title>
+    <script type="text/javascript" src="../js/dotcover.sourceview.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/dotcover.report.css" />
+  </head>
+  <body>
+    <pre id="content" class="source-code">
+using System.Data;
+
+namespace TDD_Chess;
+
+public class TChessBoard
+{
+    public List&lt;TChessField&gt; Fields;
+
+    // Func&lt;char, char, TChessman&gt; positioner
+    public TChessBoard()
+    {
+        Fields = new List&lt;TChessField&gt;();
+        for (var row = 0; row &lt; 8; row++)
+        {
+            for (var col = 0; col &lt; 8; col++)
+            {
+                var rowChar = (char)(&#39;1&#39; + row);
+                var colChar = (char)(&#39;A&#39; + col);
+                var newField = new TChessField(rowChar, colChar);
+                Fields.Add(newField);
+            }
+        }
+    }
+
+    public TChessField GetField(char row, char col)
+    {
+        return Fields.Find(x =&gt; x.Row == row &amp;&amp; x.Col == col) ?? throw new Exception(&quot;Field out of board&#39;s bounds&quot;);
+    }
+
+    public TChessField Collide(TChessField startField, TChessField newField)
+    {
+        var currentField = startField;
+        var directionX = 0;
+        var directionY = 0;
+        if (newField.Col - startField.Col &gt; 0) directionX = 1;
+        if (newField.Col - startField.Col &lt; 0) directionX = -1;
+
+        if (newField.Row - startField.Row &gt; 0) directionY = 1;
+        if (newField.Row - startField.Row &lt; 0) directionY = -1;
+        
+        do
+        {
+            try
+            {
+                currentField = GetField((char)(currentField.Row + directionY), (char)(currentField.Col + directionX));
+            }
+            catch (Exception e)
+            {
+                return startField;
+            }
+            
+        } while (currentField.Chessman is null &amp;&amp; currentField != newField);
+
+        return currentField;
+    }
+}
+    </pre>
+    <script type="text/javascript">
+      highlightRanges([[10,5,10,25,1],[11,5,11,6,1],[12,9,12,42,1],[13,14,13,25,1],[13,27,13,34,1],[13,36,13,41,1],[14,9,14,10,1],[15,18,15,29,1],[15,31,15,38,1],[15,40,15,45,1],[16,13,16,14,1],[17,17,17,49,1],[18,17,18,49,1],[19,17,19,66,1],[20,17,20,38,1],[21,13,21,14,1],[22,9,22,10,1],[23,5,23,6,1],[26,5,26,6,1],[27,9,27,33,1],[27,33,27,61,1],[27,61,27,117,1],[28,5,28,6,1],[31,5,31,6,1],[32,9,32,39,1],[33,9,33,28,1],[34,9,34,28,1],[35,9,35,47,1],[35,48,35,63,1],[36,9,36,47,1],[36,48,36,64,1],[38,9,38,47,1],[38,48,38,63,1],[39,9,39,47,1],[39,48,39,64,1],[42,9,42,10,1],[44,13,44,14,1],[45,17,45,119,1],[46,13,46,14,1],[47,13,47,32,0],[48,13,48,14,0],[49,17,49,35,0],[52,9,52,10,1],[52,11,52,77,1],[54,9,54,29,1],[55,5,55,6,1]]);
+    </script>
+  </body>
+</html>
